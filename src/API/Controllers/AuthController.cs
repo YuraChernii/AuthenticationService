@@ -5,12 +5,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
-    [Route("[controller]")]
     public class AuthController(IMediator mediator) : ControllerBase
     {
         [HttpPost("login")]
         [AllowAnonymous]
-        public async Task Login([FromBody] LoginCommand command) =>
-            await mediator.Send(command);
+        public async Task<IActionResult> Login([FromBody] LoginCommand command) =>
+            Ok(await mediator.Send(command));
     }
 }

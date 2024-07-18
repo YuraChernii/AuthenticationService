@@ -1,13 +1,11 @@
-﻿namespace Application.Exceptions
+﻿using Domain.Exceptions.Base;
+
+namespace Application.Exceptions
 {
-    public class UserNotFoundException : Exception
+    public class UserNotFoundException : NotFoundException
     {
         public UserNotFoundException(string userName)
             : base($"User with UserName: '{userName}' was not found.")
-        {
-        }
-
-        public UserNotFoundException(string message, Exception inner) : base(message, inner)
         {
         }
     }

@@ -8,7 +8,6 @@ using Infrastructure.Services.TokenServices;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Quartz;
 
 namespace Infrastructure.Extensions
 {
@@ -42,7 +41,7 @@ namespace Infrastructure.Extensions
 
         private static IServiceCollection AddConfigurations(this IServiceCollection services, IConfiguration config)
         {
-            services.Configure<JwtTokenConfigs>(o => config.GetSection("JwtTokenConfigs"));
+            services.Configure<JwtTokenConfigs>(config.GetSection("JwtTokenConfigs"));
 
             return services;
         }

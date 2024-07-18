@@ -27,6 +27,16 @@ namespace Infrastructure.Persistence.AuthDatabase.EntityConfigurations
             builder.Property(c => c.Email)
                 .IsRequired()
                 .HasMaxLength(50);
+
+            builder.Property(c => c.Password)
+                .IsRequired()
+                .HasMaxLength(50);
+
+            builder.Property(c => c.Gender)
+                .IsRequired();
+
+            builder.HasIndex(o => o.UserName)
+                .IsUnique();
         }
     }
 }

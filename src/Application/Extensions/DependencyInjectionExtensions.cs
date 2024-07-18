@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Application.Services.UserService;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Application.Extensions
 {
@@ -8,6 +9,14 @@ namespace Application.Extensions
         {
             services.AddMediatR(conf => conf.RegisterServicesFromAssembly(typeof(DependencyInjectionExtensions).Assembly));
             services.AddAutoMapper(typeof(DependencyInjectionExtensions));
+            services.AddServices();
+
+            return services;
+        }
+
+        private static IServiceCollection AddServices(this IServiceCollection services)
+        {
+            services.AddScoped<IUserApplicationService, UserApplicationService>();
 
             return services;
         }
