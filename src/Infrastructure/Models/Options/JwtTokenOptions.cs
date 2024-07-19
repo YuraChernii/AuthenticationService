@@ -1,6 +1,6 @@
-﻿namespace Infrastructure.Models.Configurations
+﻿namespace Infrastructure.Models.Options
 {
-    public class JwtTokenConfigs
+    public class JwtTokenOptions
     {
         public string SecretKey { get; set; }
         public string Issuer { get; set; }

@@ -1,5 +1,5 @@
 ﻿using Domain.Services;
-using Infrastructure.Models.Configurations;
+using Infrastructure.Models.Options;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -10,23 +10,23 @@ namespace Infrastructure.Services.TokenServices
 {
     internal class JwtTokenService : ITokenService
     {
-        private readonly JwtTokenConfigs jwtTokenConfigs;
+        private readonly JwtTokenOptions jwtTokenOptions;
 
-        public JwtTokenService(IOptions<JwtTokenConfigs> jwtTokenConfigs)
+        public JwtTokenService(IOptions<JwtTokenOptions> jwtTokenConfigs)
         {
-            this.jwtTokenConfigs = jwtTokenConfigs.Value;
+            this.jwtTokenOptions = jwtTokenConfigs.Value;
         }
 
         public string GenerateToken(string username)
         {
             JwtSecurityTokenHandler tokenHandler = new();
-            byte[] key = Encoding.ASCII.GetBytes(jwtTokenConfigs.SecretKey);
+            byte[] key = Encoding.ASCII.GetBytes(jwtTokenOptions.SecretKey);
             SecurityTokenDescriptor tokenDescriptor = new()
             {
                 Subject = new([new(ClaimTypes.Name, username)]),
-                Issuer = jwtTokenConfigs.Issuer,
-                Audience = jwtTokenConfigs.Audience,
-                Expires = DateTime.UtcNow.AddMinutes(jwtTokenConfigs.ExpirationInMinutes),
+                Issuer = jwtTokenOptions.Issuer,
+                Audience = jwtTokenOptions.Audience,
+                Expires = DateTime.UtcNow.AddMinutes(jwtTokenOptions.ExpirationInMinutes),
                 SigningCredentials = new(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
             SecurityToken token = tokenHandler.CreateToken(tokenDescriptor);

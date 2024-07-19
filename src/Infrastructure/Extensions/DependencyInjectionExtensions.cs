@@ -1,6 +1,6 @@
 ﻿using Core.Repositories;
 using Domain.Services;
-using Infrastructure.Models.Configurations;
+using Infrastructure.Models.Options;
 using Infrastructure.Persistence.AuthDatabase;
 using Infrastructure.Persistence.AuthDatabase.Repositories;
 using Infrastructure.Services;
@@ -35,13 +35,15 @@ namespace Infrastructure.Extensions
         {
             services.AddScoped<ITokenService, JwtTokenService>();
             services.AddScoped<IPasswordHashingService, PasswordHashingService>();
+            services.AddSingleton<INotificationService, AzureBusService>();
 
             return services;
         }
 
         private static IServiceCollection AddConfigurations(this IServiceCollection services, IConfiguration config)
         {
-            services.Configure<JwtTokenConfigs>(config.GetSection("JwtTokenConfigs"));
+            services.Configure<JwtTokenOptions>(config.GetSection(nameof(JwtTokenOptions)));
+            services.Configure<AzureServiceBusOptions>(config.GetSection(nameof(AzureServiceBusOptions)));
 
             return services;
         }

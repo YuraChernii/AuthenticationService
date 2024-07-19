@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace Domain.Events
+namespace Domain.Events.UserLoggedInDomainEvent
 {
     internal class UserLoggedInDomainEvent : INotification
     {

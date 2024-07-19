@@ -1,6 +1,7 @@
 ﻿using Core.Entities.Base;
 using Core.Enums;
 using Domain.Events;
+using Domain.Events.UserLoggedInDomainEvent;
 
 namespace Core.Entities
 {

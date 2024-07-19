@@ -7,6 +7,7 @@ namespace Domain.Extensions
     {
         public static IServiceCollection AddDomain(this IServiceCollection services)
         {
+            services.AddMediatR(conf => conf.RegisterServicesFromAssembly(typeof(DependencyInjectionExtensions).Assembly));
             services.AddServices();
 
             return services;
